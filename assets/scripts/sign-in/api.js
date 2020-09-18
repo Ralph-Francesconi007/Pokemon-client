@@ -29,14 +29,36 @@ const changePassword = function (data) {
   })
 }
 
-const createPokemon = function (data) {
+const createPokemon = function (pokemon) {
   return $.ajax({
     url: config.apiUrl + '/pokemon',
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + store.user.token
     },
-    data: {}
+    data: pokemon
+  })
+}
+
+const showAllPokemon = function (pokemon) {
+  return $.ajax({
+    url: config.apiUrl + '/pokemon',
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: pokemon
+  })
+}
+
+const showOnePokemon = function (pokemon) {
+  return $.ajax({
+    url: config.apiUrl + '/pokemon/' + pokemon.pokemon.id,
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: pokemon
   })
 }
 
@@ -56,5 +78,7 @@ module.exports = {
   signIn: signIn,
   changePassword: changePassword,
   createPokemon: createPokemon,
+  showAllPokemon: showAllPokemon,
+  showOnePokemon: showOnePokemon,
   signOut: signOut
 }

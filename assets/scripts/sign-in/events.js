@@ -30,9 +30,27 @@ const handlePasswordChange = function (event) {
 }
 
 const handleCreatePokemon = function (event) {
-  api.createPokemon()
+  const form = event.target
+  const pokemon = getFormFields(form)
+  api.createPokemon(pokemon)
     .then(ui.createPokemonSuccess)
     .catch(ui.createPokemonFailure)
+}
+
+const handleShowPokemon = function (event) {
+  const form = event.target
+  const pokemon = getFormFields(form)
+  api.showAllPokemon(pokemon)
+    .then(ui.showPokemonSuccess)
+    .catch(ui.showPokemonFailure)
+}
+
+const handleShowOne = function (event) {
+  const form = event.target
+  const pokemon = getFormFields(form)
+  api.showOnePokemon(pokemon)
+    .then(ui.showOneSuccess)
+    .catch(ui.showOneFailure)
 }
 
 const handleSignOut = function (event) {
@@ -49,5 +67,7 @@ module.exports = {
   handleSignUp: handleSignUp,
   handlePasswordChange: handlePasswordChange,
   handleCreatePokemon: handleCreatePokemon,
+  handleShowPokemon: handleShowPokemon,
+  handleShowOne: handleShowOne,
   handleSignOut: handleSignOut
 }

@@ -17,6 +17,8 @@ const signInSuccess = function (response) {
   $('#change-password').show()
   $('#sign-out').show()
   $('#create-pokemon').show()
+  $('#pokemon-show-button').show()
+  $('#pokemon-show-one-button').show()
   $('#sign-out-message').html('')
   $('#sign-up').hide()
   $('#sign-in').hide()
@@ -40,10 +42,49 @@ const passwordChangeFailure = function () {
 
 const createPokemonSuccess = function (response) {
   $('#create-pokemon-message').text('Pokemon added to list!')
+  $('#create-pokemon').trigger('reset')
 }
 
 const createPokemonFailure = function (response) {
   $('#create-pokemon-message').text('Pokemon could not be added!')
+}
+
+const showPokemonSuccess = function (response) {
+  store.user = response.user
+  console.log(response)
+  $('#pokemon-show').text('Here are all your pokemon!')
+  response.pokemon.forEach(pokemon => {
+    const pokemonHTML = (`
+      <p>Pokemon: ${pokemon.name}</p>
+      <p>Type: ${pokemon.type}</p>
+      <p>Move: ${pokemon.move}</p>
+      <p>ID: ${pokemon.id}</p>
+      <br>
+    `)
+    $('#show-pokemon').append(pokemonHTML)
+  })
+  $('#pokemon-show-button').hide()
+}
+
+const showPokemonFailure = function () {
+  $('#pokemon-show').text('Could not show pokemon succesfully')
+}
+
+const showOneSuccess = function (response) {
+  store.user = response.user
+  console.log(response)
+  $('#pokemon-one').text('Here is your pokemon!')
+  const pokemonHTML = (`
+      <p>Pokemon: ${response.pokemon.name}</p>
+      <p>Type: ${response.pokemon.type}</p>
+      <p>Move: ${response.pokemon.move}</p>
+      <br>
+    `)
+  $('#show-pokemon-one').append(pokemonHTML)
+}
+
+const showOneFailure = function () {
+  $('#pokemon-one').text('Could not get the pokemon.')
 }
 
 const signOutSuccess = function (response) {
@@ -69,6 +110,10 @@ module.exports = {
   passwordChangeFailure,
   createPokemonSuccess,
   createPokemonFailure,
+  showPokemonSuccess,
+  showPokemonFailure,
+  showOneSuccess,
+  showOneFailure,
   signOutSuccess,
   signOutFailed
 }
