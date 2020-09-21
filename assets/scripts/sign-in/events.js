@@ -30,14 +30,18 @@ const handlePasswordChange = function (event) {
 }
 
 const handleCreatePokemon = function (event) {
+  event.preventDefault()
   const form = event.target
   const pokemon = getFormFields(form)
+  console.log('form is', form)
+  console.log('pokemon is', pokemon)
   api.createPokemon(pokemon)
     .then(ui.createPokemonSuccess)
     .catch(ui.createPokemonFailure)
 }
 
 const handleShowPokemon = function (event) {
+  event.preventDefault()
   const form = event.target
   const pokemon = getFormFields(form)
   api.showAllPokemon(pokemon)
@@ -46,11 +50,31 @@ const handleShowPokemon = function (event) {
 }
 
 const handleShowOne = function (event) {
+  event.preventDefault()
   const form = event.target
-  const pokemon = getFormFields(form)
-  api.showOnePokemon(pokemon)
+  const pokemonId = getFormFields(form)
+  api.showOnePokemon(pokemonId.pokemon._id)
     .then(ui.showOneSuccess)
     .catch(ui.showOneFailure)
+}
+
+const handleEditPokemon = function (event) {
+  event.preventDefault()
+  const pokemonUpdate = $(event.target).data('id')
+  const form = event.target
+  const pokemonId = getFormFields(form)
+  api.editPokemon(pokemonId, pokemonUpdate)
+    .then(ui.editPokemonSuccess)
+    .catch(ui.editPokemonFailure)
+}
+
+const handleDelete = function (event) {
+  event.preventDefault()
+  const form = event.target
+  const pokemonId = getFormFields(form)
+  api.deletePokemon(pokemonId.pokemon._id)
+    .then(ui.deleteSuccess)
+    .catch(ui.deleteFailure)
 }
 
 const handleSignOut = function (event) {
@@ -69,5 +93,7 @@ module.exports = {
   handleCreatePokemon: handleCreatePokemon,
   handleShowPokemon: handleShowPokemon,
   handleShowOne: handleShowOne,
+  handleEditPokemon: handleEditPokemon,
+  handleDelete: handleDelete,
   handleSignOut: handleSignOut
 }

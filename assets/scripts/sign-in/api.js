@@ -30,6 +30,7 @@ const changePassword = function (data) {
 }
 
 const createPokemon = function (pokemon) {
+  console.log('pokemon is', pokemon)
   return $.ajax({
     url: config.apiUrl + '/pokemon',
     method: 'POST',
@@ -51,14 +52,36 @@ const showAllPokemon = function (pokemon) {
   })
 }
 
-const showOnePokemon = function (pokemon) {
+const showOnePokemon = function (pokemonId) {
   return $.ajax({
-    url: config.apiUrl + '/pokemon/' + pokemon.pokemon.id,
+    url: config.apiUrl + '/pokemon/' + pokemonId,
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + store.user.token
     },
-    data: pokemon
+    data: pokemonId
+  })
+}
+
+const editPokemon = function (pokemonId, pokemonUpdate) {
+  return $.ajax({
+    url: config.apiUrl + '/pokemon/' + pokemonId.pokemon._id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: pokemonId
+  })
+}
+
+const deletePokemon = function (pokemonId) {
+  return $.ajax({
+    url: config.apiUrl + '/pokemon/' + pokemonId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: pokemonId
   })
 }
 
@@ -80,5 +103,7 @@ module.exports = {
   createPokemon: createPokemon,
   showAllPokemon: showAllPokemon,
   showOnePokemon: showOnePokemon,
+  deletePokemon: deletePokemon,
+  editPokemon: editPokemon,
   signOut: signOut
 }

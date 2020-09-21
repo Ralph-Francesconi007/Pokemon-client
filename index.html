@@ -83,15 +83,15 @@
                 <legend>Add A Pokemon!</legend>
 
                 <label for="name">Name</label>
-                <input id="name" type="text" placeholder="Name">
+                <input id="name" name="pokemon[name]" type="text" placeholder="Name">
 
                 <label for="type">Type</label>
-                <input id="type" type="text" placeholder="Type">
+                <input id="type" name="pokemon[type]" type="text" placeholder="Type">
 
                 <label for="move">Move</label>
-                <input id="move" type="text" placeholder="Move">
+                <input id="move" name="pokemon[move]" type="text" placeholder="Move">
 
-                <input id="pokemon-create" type="button" value="Add The Pokemon!">
+                <input id="pokemon-create" type="submit" value="Add The Pokemon!">
               </fieldset>
             </form>
 
@@ -102,7 +102,7 @@
           <section>
 
           <form id="show-pokemon">
-          <button id="pokemon-show-button" type="button">Show Pokemon!</button>
+          <button id="pokemon-show-button" type="submit">Show All Pokemon!</button>
 
           </form>
         </section>
@@ -112,10 +112,47 @@
         <section>
 
         <form id="show-pokemon-one">
-        <button id="pokemon-show-one-button" type="button">Show One Pokemon!</button>
+        <input id="get-pokemon" name="pokemon[_id]" type="text" placeholder="Add the _id">
+        <button id="pokemon-show-one-button" type="submit">Show A Pokemon!</button>
 
         </form>
       </section>
+
+      <p id="edit-pokemon-message"></p>
+
+      <section>
+          <form id="edit-pokemon">
+            <fieldset>
+              <legend>Edit A Pokemon!</legend>
+
+              <label for="name">Edit Name</label>
+              <input id="edit_name" name="pokemon[name]" type="text" placeholder="Edit Name">
+
+              <label for="type">Edit Type</label>
+              <input id="edit_type" name="pokemon[type]" type="text" placeholder="Edit Type">
+
+              <label for="move">Edit Move</label>
+              <input id="edit_move" name="pokemon[move]" type="text" placeholder="Edit Move">
+
+              <label for="_id">Add the _id</label>
+              <input id="pokemon_id" name="pokemon[_id]" type="text" placeholder="Add _id">
+
+              <input id="pokemon-edit" type="submit" value="Edit Pokemon!">
+            </fieldset>
+          </form>
+
+        </section>
+
+      <p id="pokemon-delete-message"></p>
+
+      <section>
+
+      <form id="pokemon-delete">
+      <input id="delete-one" name="pokemon[_id]" type="text" placeholder="Add the _id">
+      <button id="pokemon-delete-button" type="submit">Delete A Pokemon!</button>
+
+      </form>
+    </section>
 
       <section>
 

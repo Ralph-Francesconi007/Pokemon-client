@@ -18,7 +18,9 @@ const signInSuccess = function (response) {
   $('#sign-out').show()
   $('#create-pokemon').show()
   $('#pokemon-show-button').show()
-  $('#pokemon-show-one-button').show()
+  $('#show-pokemon-one').show()
+  $('#edit-pokemon').show()
+  $('#pokemon-delete').show()
   $('#sign-out-message').html('')
   $('#sign-up').hide()
   $('#sign-in').hide()
@@ -51,14 +53,13 @@ const createPokemonFailure = function (response) {
 
 const showPokemonSuccess = function (response) {
   store.user = response.user
-  console.log(response)
   $('#pokemon-show').text('Here are all your pokemon!')
   response.pokemon.forEach(pokemon => {
     const pokemonHTML = (`
       <p>Pokemon: ${pokemon.name}</p>
       <p>Type: ${pokemon.type}</p>
       <p>Move: ${pokemon.move}</p>
-      <p>ID: ${pokemon.id}</p>
+      <p>ID: ${pokemon._id}</p>
       <br>
     `)
     $('#show-pokemon').append(pokemonHTML)
@@ -72,7 +73,6 @@ const showPokemonFailure = function () {
 
 const showOneSuccess = function (response) {
   store.user = response.user
-  console.log(response)
   $('#pokemon-one').text('Here is your pokemon!')
   const pokemonHTML = (`
       <p>Pokemon: ${response.pokemon.name}</p>
@@ -85,6 +85,23 @@ const showOneSuccess = function (response) {
 
 const showOneFailure = function () {
   $('#pokemon-one').text('Could not get the pokemon.')
+}
+
+const editPokemonSuccess = function (response) {
+  store.user = response.user
+  $('#edit-pokemon-message').html('Pokemon has been updated!')
+}
+
+const editPokemonFailure = function () {
+  $('#edit-pokemon-message').html('Pokemon could not be updated!')
+}
+
+const deleteSuccess = function (response) {
+  $('#pokemon-delete-message').html('You have successfully deleted the Pokemon!')
+}
+
+const deleteFailure = function () {
+  $('#pokemon-delete-message').html('Pokemon could not be deleted!')
 }
 
 const signOutSuccess = function (response) {
@@ -114,6 +131,10 @@ module.exports = {
   showPokemonFailure,
   showOneSuccess,
   showOneFailure,
+  editPokemonSuccess,
+  editPokemonFailure,
+  deleteSuccess,
+  deleteFailure,
   signOutSuccess,
   signOutFailed
 }
