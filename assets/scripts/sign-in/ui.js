@@ -15,12 +15,9 @@ const signInSuccess = function (response) {
   $('#sign-in-message').text('You are Signed in ' + response.user.email)
   $('#message').html('')
   $('#change-password').show()
+  $('#pokemon-show-button').show()
   $('#sign-out').show()
   $('#create-pokemon').show()
-  $('#pokemon-show-button').show()
-  $('#show-pokemon-one').show()
-  $('#edit-pokemon').show()
-  $('#pokemon-delete').show()
   $('#sign-out-message').html('')
   $('#sign-up').hide()
   $('#sign-in').hide()
@@ -52,14 +49,28 @@ const createPokemonFailure = function (response) {
 }
 
 const showPokemonSuccess = function (response) {
-  store.user = response.user
-  $('#pokemon-show').text('Here are all your pokemon!')
+  $('#pokemon-show').text('Here is your pokedex!')
   response.pokemon.forEach(pokemon => {
     const pokemonHTML = (`
+      <div>
       <p>Pokemon: ${pokemon.name}</p>
       <p>Type: ${pokemon.type}</p>
       <p>Move: ${pokemon.move}</p>
-      <p>ID: ${pokemon._id}</p>
+      <form>
+        <legend>Edit Pokemon!</legend>
+
+        <label for="Pokemon-Name">Pokemon Name</label>
+        <input name="pokemon[name]" type="text" value="${pokemon.name}">
+
+        <label for="Pokemon-Type">Type</label>
+        <input name="pokemon[type]" type="text" value="${pokemon.type}">
+
+        <label for="Pokemon-Move">Move</label>
+        <input name="pokemon[move]" type="text" value="${pokemon.move}">
+      </form>
+      <button class="delete-button" data-cell-index="${pokemon._id}">Delete Pokemon!</button>
+      <button class="update-button" data-cell-index="${pokemon._id}">Update Pokemon!</button>
+      </div>
       <br>
     `)
     $('#show-pokemon').append(pokemonHTML)
@@ -71,24 +82,11 @@ const showPokemonFailure = function () {
   $('#pokemon-show').text('Could not show pokemon succesfully')
 }
 
-const showOneSuccess = function (response) {
-  store.user = response.user
-  $('#pokemon-one').text('Here is your pokemon!')
-  const pokemonHTML = (`
-      <p>Pokemon: ${response.pokemon.name}</p>
-      <p>Type: ${response.pokemon.type}</p>
-      <p>Move: ${response.pokemon.move}</p>
-      <br>
-    `)
-  $('#show-pokemon-one').append(pokemonHTML)
-}
-
-const showOneFailure = function () {
-  $('#pokemon-one').text('Could not get the pokemon.')
+const editPokemonHandle = function () {
+  $('.update-button').show()
 }
 
 const editPokemonSuccess = function (response) {
-  store.user = response.user
   $('#edit-pokemon-message').html('Pokemon has been updated!')
 }
 
@@ -98,16 +96,28 @@ const editPokemonFailure = function () {
 
 const deleteSuccess = function (response) {
   $('#pokemon-delete-message').html('You have successfully deleted the Pokemon!')
+  $('#pokemon-delete').trigger('reset')
 }
 
 const deleteFailure = function () {
   $('#pokemon-delete-message').html('Pokemon could not be deleted!')
 }
 
+// const handleShow = function (event) {
+//   const updateForm = $(event.target).attr('data-cell-index')
+//   $('#' + updateForm).show()
+//   $('.' + updateForm).hide()
+//   $('.' + updateForm).hide()
+// }
+
 const signOutSuccess = function (response) {
   $('#sign-out-message').text('Successfully logged out, Please Sign In')
   $('#sign-up').show()
   $('#sign-in').show()
+  $('#sign-in').trigger('reset')
+  $('#create-pokemon').hide()
+  $('#show-pokemon').hide()
+  $('#pokemon-show').html('')
   $('#sign-in-message').text('')
   $('#change-password').hide()
   $('#change-password-message').text('')
@@ -129,12 +139,12 @@ module.exports = {
   createPokemonFailure,
   showPokemonSuccess,
   showPokemonFailure,
-  showOneSuccess,
-  showOneFailure,
+  editPokemonHandle,
   editPokemonSuccess,
   editPokemonFailure,
   deleteSuccess,
   deleteFailure,
+  // handleShow,
   signOutSuccess,
   signOutFailed
 }

@@ -17,6 +17,7 @@ const handleSignIn = function (event) {
   const data = getFormFields(form)
   api.signIn(data)
     .then(ui.signInSuccess)
+    // .then(handleShowPokemon)
     .catch(ui.signInFailure)
 }
 
@@ -33,10 +34,9 @@ const handleCreatePokemon = function (event) {
   event.preventDefault()
   const form = event.target
   const pokemon = getFormFields(form)
-  console.log('form is', form)
-  console.log('pokemon is', pokemon)
   api.createPokemon(pokemon)
     .then(ui.createPokemonSuccess)
+    // .then(handleShowPokemon)
     .catch(ui.createPokemonFailure)
 }
 
@@ -49,30 +49,22 @@ const handleShowPokemon = function (event) {
     .catch(ui.showPokemonFailure)
 }
 
-const handleShowOne = function (event) {
-  event.preventDefault()
-  const form = event.target
-  const pokemonId = getFormFields(form)
-  api.showOnePokemon(pokemonId.pokemon._id)
-    .then(ui.showOneSuccess)
-    .catch(ui.showOneFailure)
-}
-
 const handleEditPokemon = function (event) {
   event.preventDefault()
-  const pokemonUpdate = $(event.target).data('id')
+  const pokemonUpdate = $(event.target).attr('data-cell-index')
   const form = event.target
-  const pokemonId = getFormFields(form)
-  api.editPokemon(pokemonId, pokemonUpdate)
+  const pokemon = getFormFields(form)
+  api.editPokemon(pokemon, pokemonUpdate)
     .then(ui.editPokemonSuccess)
+    // .then(handleShowPokemon)
     .catch(ui.editPokemonFailure)
 }
 
 const handleDelete = function (event) {
   event.preventDefault()
-  const form = event.target
-  const pokemonId = getFormFields(form)
-  api.deletePokemon(pokemonId.pokemon._id)
+  const pokemon = $(event.target).attr('data-cell-index')
+  api.deletePokemon(pokemon)
+    // .then(handleShowPokemon)
     .then(ui.deleteSuccess)
     .catch(ui.deleteFailure)
 }
@@ -92,7 +84,6 @@ module.exports = {
   handlePasswordChange: handlePasswordChange,
   handleCreatePokemon: handleCreatePokemon,
   handleShowPokemon: handleShowPokemon,
-  handleShowOne: handleShowOne,
   handleEditPokemon: handleEditPokemon,
   handleDelete: handleDelete,
   handleSignOut: handleSignOut
