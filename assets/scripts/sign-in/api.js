@@ -52,7 +52,6 @@ const showAllPokemon = function (pokemon) {
 }
 
 const editPokemon = function (pokemon, pokemonUpdate) {
-  console.log(pokemon)
   return $.ajax({
     url: config.apiUrl + '/pokemon/' + `${pokemonUpdate}`,
     method: 'PATCH',

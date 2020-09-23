@@ -12,8 +12,8 @@ const signUpFailure = function () {
 
 const signInSuccess = function (response) {
   store.user = response.user
-  $('#sign-in-message').text('You are Signed in ' + response.user.email)
-  $('#message').html('')
+  $('#sign-in-message').text('You are signed in ' + response.user.email)
+  $('#sign-up-message').html('')
   $('#change-password').show()
   $('#pokemon-show-button').show()
   $('#sign-out').show()
@@ -50,13 +50,14 @@ const createPokemonFailure = function (response) {
 
 const showPokemonSuccess = function (response) {
   $('#pokemon-show').text('Here is your pokedex!')
+  $('#create-pokemon-message').html('')
   response.pokemon.forEach(pokemon => {
     const pokemonHTML = (`
-      <div>
+      <div class="all-pokemon">
       <p>Pokemon: ${pokemon.name}</p>
       <p>Type: ${pokemon.type}</p>
       <p>Move: ${pokemon.move}</p>
-      <form id="${pokemon._id}">
+      <form class="update-pokemon">
         <legend>Edit Pokemon!</legend>
 
         <label for="Pokemon-Name">Pokemon Name</label>
@@ -66,16 +67,16 @@ const showPokemonSuccess = function (response) {
         <input name="pokemon[type]" type="text" value="${pokemon.type}">
 
         <label for="Pokemon-Move">Move</label>
-        <input name="pokemon[move]" type="text" value="${pokemon.move}">
+        <input name="pokemonmove]" type="text" value="${pokemon.move}">
       </form>
       <button class="delete-button" data-cell-index="${pokemon._id}">Delete Pokemon!</button>
       <button class="update-button" data-cell-index="${pokemon._id}">Update Pokemon!</button>
       </div>
       <br>
     `)
-    $('#show-pokemon').append(pokemonHTML)
+    $('#show-pokemon').prepend(pokemonHTML)
   })
-  $('#pokemon-show-button').hide()
+  // $('#pokemon-show-button').hide()
 }
 
 const showPokemonFailure = function () {

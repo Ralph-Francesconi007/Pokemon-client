@@ -52,6 +52,7 @@ const handleShowPokemon = function (event) {
 const handleEditPokemon = function (event) {
   event.preventDefault()
   const pokemonUpdate = $(event.target).attr('data-cell-index')
+  console.log(pokemonUpdate)
   const form = event.target
   const pokemon = getFormFields(form)
   api.editPokemon(pokemon, pokemonUpdate)
@@ -64,8 +65,8 @@ const handleDelete = function (event) {
   event.preventDefault()
   const pokemon = $(event.target).attr('data-cell-index')
   api.deletePokemon(pokemon)
-    // .then(handleShowPokemon)
     .then(ui.deleteSuccess)
+    // .then(handleShowPokemon)
     .catch(ui.deleteFailure)
 }
 
