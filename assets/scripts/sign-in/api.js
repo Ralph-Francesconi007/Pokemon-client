@@ -30,7 +30,6 @@ const changePassword = function (data) {
 }
 
 const createPokemon = function (pokemon) {
-  console.log('pokemon is', pokemon)
   return $.ajax({
     url: config.apiUrl + '/pokemon',
     method: 'POST',
@@ -52,36 +51,24 @@ const showAllPokemon = function (pokemon) {
   })
 }
 
-const showOnePokemon = function (pokemonId) {
+const editPokemon = function (pokemon, pokemonUpdate) {
   return $.ajax({
-    url: config.apiUrl + '/pokemon/' + pokemonId,
-    method: 'GET',
-    headers: {
-      Authorization: 'Bearer ' + store.user.token
-    },
-    data: pokemonId
-  })
-}
-
-const editPokemon = function (pokemonId, pokemonUpdate) {
-  return $.ajax({
-    url: config.apiUrl + '/pokemon/' + pokemonId.pokemon._id,
+    url: config.apiUrl + '/pokemon/' + `${pokemonUpdate}`,
     method: 'PATCH',
     headers: {
       Authorization: 'Bearer ' + store.user.token
     },
-    data: pokemonId
+    data: pokemon
   })
 }
 
-const deletePokemon = function (pokemonId) {
+const deletePokemon = function (pokemon) {
   return $.ajax({
-    url: config.apiUrl + '/pokemon/' + pokemonId,
+    url: config.apiUrl + '/pokemon/' + `${pokemon}`,
     method: 'DELETE',
     headers: {
       Authorization: 'Bearer ' + store.user.token
-    },
-    data: pokemonId
+    }
   })
 }
 
@@ -102,7 +89,6 @@ module.exports = {
   changePassword: changePassword,
   createPokemon: createPokemon,
   showAllPokemon: showAllPokemon,
-  showOnePokemon: showOnePokemon,
   deletePokemon: deletePokemon,
   editPokemon: editPokemon,
   signOut: signOut
