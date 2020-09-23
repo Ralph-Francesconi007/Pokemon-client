@@ -57,6 +57,13 @@ const showPokemonSuccess = function (response) {
       <p>Pokemon: ${pokemon.name}</p>
       <p>Type: ${pokemon.type}</p>
       <p>Move: ${pokemon.move}</p>
+      </div>
+    `)
+    $('#show-pokemon').append(pokemonHTML)
+  })
+  response.pokemon.forEach(pokemon => {
+    const pokemonEdit = (`
+      <div>
       <form class="update-pokemon">
         <legend>Edit Pokemon!</legend>
 
@@ -73,9 +80,10 @@ const showPokemonSuccess = function (response) {
       <button class="update-button" data-cell-index="${pokemon._id}">Update Pokemon!</button>
       </div>
       <br>
-    `)
-    $('#show-pokemon').prepend(pokemonHTML)
+      `)
+    $('#show-pokemon').append(pokemonEdit)
   })
+
   // $('#pokemon-show-button').hide()
 }
 
