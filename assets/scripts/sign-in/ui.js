@@ -56,7 +56,7 @@ const showPokemonSuccess = function (response) {
       <p>Pokemon: ${pokemon.name}</p>
       <p>Type: ${pokemon.type}</p>
       <p>Move: ${pokemon.move}</p>
-      <form>
+      <form id="${pokemon._id}">
         <legend>Edit Pokemon!</legend>
 
         <label for="Pokemon-Name">Pokemon Name</label>
