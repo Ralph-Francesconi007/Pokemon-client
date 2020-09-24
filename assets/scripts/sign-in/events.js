@@ -1,6 +1,7 @@
 const getFormFields = require('./../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const store = require('../store')
 
 const handleSignUp = function (event) {
   event.preventDefault()
@@ -36,37 +37,34 @@ const handleCreatePokemon = function (event) {
   const pokemon = getFormFields(form)
   api.createPokemon(pokemon)
     .then(ui.createPokemonSuccess)
-    // .then(handleShowPokemon)
     .catch(ui.createPokemonFailure)
 }
 
 const handleShowPokemon = function (event) {
   event.preventDefault()
-  const form = event.target
-  const pokemon = getFormFields(form)
-  api.showAllPokemon(pokemon)
+  api.showAllPokemon()
     .then(ui.showPokemonSuccess)
     .catch(ui.showPokemonFailure)
 }
 
+const handleEdit = function (event) {
+  event.preventDefault()
+  store.pokemonid = event.target.value
+}
+
 const handleEditPokemon = function (event) {
   event.preventDefault()
-  const pokemonUpdate = $(event.target).attr('data-cell-index')
-  console.log(pokemonUpdate)
-  const form = event.target
-  const pokemon = getFormFields(form)
-  api.editPokemon(pokemon, pokemonUpdate)
+  const formData = getFormFields(event.target)
+  api.editPokemon(formData)
     .then(ui.editPokemonSuccess)
-    // .then(handleShowPokemon)
     .catch(ui.editPokemonFailure)
 }
 
 const handleDelete = function (event) {
   event.preventDefault()
-  const pokemon = $(event.target).attr('data-cell-index')
-  api.deletePokemon(pokemon)
+  store.pokemonid = event.target.value
+  api.deletePokemon()
     .then(ui.deleteSuccess)
-    // .then(handleShowPokemon)
     .catch(ui.deleteFailure)
 }
 
@@ -85,6 +83,7 @@ module.exports = {
   handlePasswordChange: handlePasswordChange,
   handleCreatePokemon: handleCreatePokemon,
   handleShowPokemon: handleShowPokemon,
+  handleEdit: handleEdit,
   handleEditPokemon: handleEditPokemon,
   handleDelete: handleDelete,
   handleSignOut: handleSignOut
