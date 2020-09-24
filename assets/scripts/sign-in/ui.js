@@ -40,7 +40,7 @@ const passwordChangeFailure = function () {
 }
 
 const createPokemonSuccess = function (response) {
-  $('#create-pokemon-message').text('Pokemon added to list!')
+  $('#create-pokemon-message').text('Pokemon added to list! Hit the show all pokemon button to see your pokedex!')
   $('#create-pokemon').trigger('reset')
 }
 
@@ -49,46 +49,28 @@ const createPokemonFailure = function (response) {
 }
 
 const showPokemonSuccess = function (response) {
-  $('#pokemon-show').text('Here is your pokedex!')
+  $('#show-pokemon-message').text('Here is your pokedex!')
   $('#create-pokemon-message').html('')
-  response.pokemon.forEach(pokemon => {
-    const pokemonHTML = (`
+  $('#update-pokemon').show()
+  $('#pokemon-showAll').empty()
+  for (let i = 0; i < response.pokemon.length; i++) {
+    $('#pokemon-showAll').append(`
       <div class="all-pokemon">
-      <p>Pokemon: ${pokemon.name}</p>
-      <p>Type: ${pokemon.type}</p>
-      <p>Move: ${pokemon.move}</p>
+      <p>Pokemon: ${response.pokemon[i].name}</p>
+      <p>Type: ${response.pokemon[i].type}</p>
+      <p>Move: ${response.pokemon[i].move}</p>
+      <button class="delete-button" type="button" value="${response.pokemon[i]._id}">Delete Button</button>
+      <br>
       </div>
     `)
-    $('#show-pokemon').append(pokemonHTML)
-  })
-  response.pokemon.forEach(pokemon => {
-    const pokemonEdit = (`
-      <div>
-      <form class="update-pokemon">
-        <legend>Edit Pokemon!</legend>
-
-        <label for="Pokemon-Name">Pokemon Name</label>
-        <input name="pokemon[name]" type="text" value="${pokemon.name}">
-
-        <label for="Pokemon-Type">Type</label>
-        <input name="pokemon[type]" type="text" value="${pokemon.type}">
-
-        <label for="Pokemon-Move">Move</label>
-        <input name="pokemonmove]" type="text" value="${pokemon.move}">
-      </form>
-      <button class="delete-button" data-cell-index="${pokemon._id}">Delete Pokemon!</button>
-      <button class="update-button" data-cell-index="${pokemon._id}">Update Pokemon!</button>
-      </div>
-      <br>
-      `)
-    $('#show-pokemon').append(pokemonEdit)
-  })
-
-  // $('#pokemon-show-button').hide()
+    $('#pokemon-showAll').append(`
+        <button id="edit-button" class="update" type="submit" value="${response.pokemon[i]._id}">Edit Pokemon!</button>
+    `)
+  }
 }
 
 const showPokemonFailure = function () {
-  $('#pokemon-show').text('Could not show pokemon succesfully')
+  $('#show-pokemon-message').text('Could not show pokemon succesfully')
 }
 
 const editPokemonHandle = function () {
@@ -96,7 +78,7 @@ const editPokemonHandle = function () {
 }
 
 const editPokemonSuccess = function (response) {
-  $('#edit-pokemon-message').html('Pokemon has been updated!')
+  $('#edit-pokemon-message').html('Pokemon has been updated! Hit the show all pokemon button to see your new pokemon!')
 }
 
 const editPokemonFailure = function () {
@@ -104,8 +86,7 @@ const editPokemonFailure = function () {
 }
 
 const deleteSuccess = function (response) {
-  $('#pokemon-delete-message').html('You have successfully deleted the Pokemon!')
-  $('#pokemon-delete').trigger('reset')
+  $('#pokemon-delete-message').html('You have successfully deleted the Pokemon! Hit the show all pokemon button to see the updated list!')
 }
 
 const deleteFailure = function () {
@@ -126,7 +107,7 @@ const signOutSuccess = function (response) {
   $('#sign-in').trigger('reset')
   $('#create-pokemon').hide()
   $('#show-pokemon').hide()
-  $('#pokemon-show').html('')
+  $('#show-pokemon-message').html('')
   $('#sign-in-message').text('')
   $('#change-password').hide()
   $('#change-password-message').text('')

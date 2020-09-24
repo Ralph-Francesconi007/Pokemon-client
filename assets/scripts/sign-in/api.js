@@ -51,20 +51,20 @@ const showAllPokemon = function (pokemon) {
   })
 }
 
-const editPokemon = function (pokemon, pokemonUpdate) {
+const editPokemon = function (data) {
   return $.ajax({
-    url: config.apiUrl + '/pokemon/' + `${pokemonUpdate}`,
+    url: config.apiUrl + '/pokemon/' + store.pokemonid,
     method: 'PATCH',
     headers: {
       Authorization: 'Bearer ' + store.user.token
     },
-    data: pokemon
+    data: data
   })
 }
 
 const deletePokemon = function (pokemon) {
   return $.ajax({
-    url: config.apiUrl + '/pokemon/' + `${pokemon}`,
+    url: config.apiUrl + '/pokemon/' + store.pokemonid,
     method: 'DELETE',
     headers: {
       Authorization: 'Bearer ' + store.user.token

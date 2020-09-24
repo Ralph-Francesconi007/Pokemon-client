@@ -97,12 +97,36 @@
 
           </section>
 
-         <p id="pokemon-show"></p>
+         <p id="show-pokemon-message"></p>
+         <p id="pokemon-delete-message"></p>
 
          <section>
 
          <form id="show-pokemon">
-         <button id="pokemon-show-button" class="button5" type="submit">Show All Pokemon!</button>
+
+           <button id="pokemon-show-button" class="button5" type="button">Show All Pokemon!</button>
+          <div id="pokemon-showAll">
+          </div>
+         </form>
+       </section>
+
+       <p id="edit-pokemon-message">
+
+       <section>
+         <form id="update-pokemon">
+           <legend>Edit Pokemon!</legend>
+
+
+           <label for="Pokemon-Name">Pokemon Name</label>
+           <input name="pokemon[name]" type="text" placeholder="Update Name">
+
+           <label for="Pokemon-Type">Type</label>
+           <input name="pokemon[type]" type="text" placeholder="Update Type">
+
+           <label for="Pokemon-Move">Move</label>
+           <input name="pokemon[move]" type="text" placeholder="Update Move">
+
+           <input type="submit" value="Update Pokemon">
 
          </form>
        </section>
