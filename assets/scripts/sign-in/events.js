@@ -18,7 +18,6 @@ const handleSignIn = function (event) {
   const data = getFormFields(form)
   api.signIn(data)
     .then(ui.signInSuccess)
-    // .then(handleShowPokemon)
     .catch(ui.signInFailure)
 }
 

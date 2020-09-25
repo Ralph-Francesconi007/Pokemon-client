@@ -51,7 +51,8 @@ const createPokemonFailure = function (response) {
 const showPokemonSuccess = function (response) {
   $('#show-pokemon-message').text('Here is your pokedex!')
   $('#create-pokemon-message').html('')
-  $('#update-pokemon').show()
+  $('#edit-pokemon-message').html('')
+  $('#pokemon-delete-message').html('')
   $('#pokemon-showAll').empty()
   for (let i = 0; i < response.pokemon.length; i++) {
     $('#pokemon-showAll').append(`
@@ -59,12 +60,11 @@ const showPokemonSuccess = function (response) {
       <p>Pokemon: ${response.pokemon[i].name}</p>
       <p>Type: ${response.pokemon[i].type}</p>
       <p>Move: ${response.pokemon[i].move}</p>
-      <button class="delete-button" type="button" value="${response.pokemon[i]._id}">Delete Button</button>
-      <br>
       </div>
     `)
     $('#pokemon-showAll').append(`
         <button id="edit-button" class="update" type="submit" value="${response.pokemon[i]._id}">Edit Pokemon!</button>
+        <button class="delete-button" type="button" value="${response.pokemon[i]._id}">Delete Button</button>
     `)
   }
 }
@@ -73,12 +73,21 @@ const showPokemonFailure = function () {
   $('#show-pokemon-message').text('Could not show pokemon succesfully')
 }
 
+const editPokemonShow = function () {
+  $('#update-pokemon').show()
+}
+
+const editSuccess = function () {
+  $('#update-pokemon').hide()
+}
+
 const editPokemonHandle = function () {
   $('.update-button').show()
 }
 
 const editPokemonSuccess = function (response) {
   $('#edit-pokemon-message').html('Pokemon has been updated! Hit the show all pokemon button to see your new pokemon!')
+  $('#update-pokemon').trigger('reset')
 }
 
 const editPokemonFailure = function () {
@@ -93,20 +102,15 @@ const deleteFailure = function () {
   $('#pokemon-delete-message').html('Pokemon could not be deleted!')
 }
 
-// const handleShow = function (event) {
-//   const updateForm = $(event.target).attr('data-cell-index')
-//   $('#' + updateForm).show()
-//   $('.' + updateForm).hide()
-//   $('.' + updateForm).hide()
-// }
-
 const signOutSuccess = function (response) {
   $('#sign-out-message').text('Successfully logged out, Please Sign In')
   $('#sign-up').show()
   $('#sign-in').show()
   $('#sign-in').trigger('reset')
   $('#create-pokemon').hide()
+  $('#pokemon-show-button').hide()
   $('#show-pokemon').hide()
+  $('#update-pokemon').hide()
   $('#show-pokemon-message').html('')
   $('#sign-in-message').text('')
   $('#change-password').hide()
@@ -132,9 +136,10 @@ module.exports = {
   editPokemonHandle,
   editPokemonSuccess,
   editPokemonFailure,
+  editPokemonShow,
+  editSuccess,
   deleteSuccess,
   deleteFailure,
-  // handleShow,
   signOutSuccess,
   signOutFailed
 }

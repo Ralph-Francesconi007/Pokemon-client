@@ -4,6 +4,7 @@
 // const example = require('./example')
 
 const events = require('./sign-in/events')
+const ui = require('./sign-in/ui')
 // const ui = require('./sign-in/ui')
 
 // use require without a reference to ensure a file is bundled
@@ -23,8 +24,8 @@ $(() => {
   $('#pokemon-show-button').on('click', events.handleShowPokemon)
   $('#show-pokemon').on('click', '.delete-button', events.handleDelete)
   $('#show-pokemon').on('click', '#edit-button', events.handleEdit)
+  $('#show-pokemon').on('click', '#edit-button', ui.editPokemonShow)
+  $('#update-pokemon').on('click', '.update', ui.editSuccess)
   $('#update-pokemon').on('submit', events.handleEditPokemon)
-
-  // $('#show-pokemon').on('click', '.update-button', ui.handleShow)
   $('#sign-out').on('submit', events.handleSignOut)
 })
