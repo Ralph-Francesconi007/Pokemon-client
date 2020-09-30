@@ -12,6 +12,7 @@ const signUpFailure = function () {
 
 const signInSuccess = function (response) {
   store.user = response.user
+  console.log(store.user)
   $('#sign-in-message').text('You are signed in ' + response.user.email)
   $('#sign-up-message').html('')
   $('#change-password').show()
@@ -55,6 +56,7 @@ const showPokemonSuccess = function (response) {
   $('#pokemon-delete-message').html('')
   $('#pokemon-showAll').empty()
   for (let i = 0; i < response.pokemon.length; i++) {
+    console.log(response.pokemon)
     $('#pokemon-showAll').append(`
       <div class="all-pokemon">
       <p>Pokemon: ${response.pokemon[i].name}</p>
@@ -96,6 +98,7 @@ const editPokemonFailure = function () {
 
 const deleteSuccess = function (response) {
   $('#pokemon-delete-message').html('You have successfully deleted the Pokemon! Hit the show all pokemon button to see the updated list!')
+  $('#update-pokemon').hide()
 }
 
 const deleteFailure = function () {
@@ -109,8 +112,10 @@ const signOutSuccess = function (response) {
   $('#sign-in').trigger('reset')
   $('#create-pokemon').hide()
   $('#pokemon-show-button').hide()
-  $('#show-pokemon').hide()
   $('#update-pokemon').hide()
+  $('.all-pokemon').hide()
+  $('.update').hide()
+  $('.delete-button').hide()
   $('#show-pokemon-message').html('')
   $('#sign-in-message').text('')
   $('#change-password').hide()
