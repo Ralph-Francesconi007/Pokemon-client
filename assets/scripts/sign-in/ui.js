@@ -12,7 +12,6 @@ const signUpFailure = function () {
 
 const signInSuccess = function (response) {
   store.user = response.user
-  console.log(store.user)
   $('#sign-in-message').text('You are signed in ' + response.user.email)
   $('#sign-up-message').html('')
   $('#change-password').show()
@@ -56,7 +55,6 @@ const showPokemonSuccess = function (response) {
   $('#pokemon-delete-message').html('')
   $('#pokemon-showAll').empty()
   for (let i = 0; i < response.pokemon.length; i++) {
-    console.log(response.pokemon)
     $('#pokemon-showAll').append(`
       <div class="all-pokemon">
       <p>Pokemon: ${response.pokemon[i].name}</p>
