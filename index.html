@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Pokemon Library</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <h1>Pokemon Library</h1>
+
+      <p id="sign-up-message"></p>
+      <p id="sign-out-message"></p>
+
+      <section>
+      <form id="sign-up" class="sign-up-form">
+        <fieldset>
+          <legend>Sign Up!</legend>
+
+          <label for="email">Email</label>
+          <input name="credentials[email]" placeholder="Email" type="email" value="">
+
+          <label for="password">Password</label>
+          <input name="credentials[password]" placeholder="Password" type="password" value="">
+
+          <label for="password_confirmation">Password Confirmation</label>
+          <input name="credentials[password_confirmation]" placeholder="Confirmation" type="Password" value="">
+
+          <button class="button1" type="submit">Sign Up!</button>
+
+        </fieldset>
+      </form>
+    </section>
+
+    <p id="sign-in-message"></p>
+
+    <section>
+        <form id="sign-in" class="sign-in-form">
+          <fieldset>
+            <legend>Sign In!</legend>
+
+            <label for="email">Email</label>
+            <input name="credentials[email]" placeholder="Email" type="email" value="">
+
+            <label for="password">Password</label>
+            <input name="credentials[password]" placeholder="Password" type="password" value="">
+
+            <button class="button2" type="submit">Sign In!</button>
+
+          </fieldset>
+        </form>
+      </section>
+
+      <p id="change-password-message"></p>
+
+      <section>
+          <form id="change-password" class="change-pass">
+            <fieldset>
+              <legend>Change Password!</legend>
+
+              <label for="old password">Old Password</label>
+              <input type="password" name="passwords[old]" placeholder="Old Password">
+
+              <label for="new password">New Password</label>
+              <input type="password" name="passwords[new]" placeholder="New Password">
+
+              <input class="button3" type="submit" value="Change Password!">
+            </fieldset>
+          </form>
+
+        </section>
+
+        <p id="create-pokemon-message"></p>
+
+        <section>
+            <form id="create-pokemon" class="pokemon-create">
+              <fieldset>
+                <legend class="add-pokemon">Add A Pokemon!</legend>
+
+                <label for="name">Name</label>
+                <input id="name" name="pokemon[name]" type="text" placeholder="Pokemon Name">
+
+                <label for="type">Type</label>
+                <input id="type" name="pokemon[type]" type="text" placeholder="Pokemon Type">
+
+                <label for="move">Move</label>
+                <input id="move" name="pokemon[move]" type="text" placeholder="Pokemon Move">
+
+                <input id="pokemon-create" type="submit" class="button4" value="Add The Pokemon!">
+              </fieldset>
+            </form>
+
+          </section>
+
+         <p id="show-pokemon-message"></p>
+         <p id="edit-pokemon-message">
+         <p id="pokemon-delete-message"></p>
+
+         <button id="pokemon-show-button" class="button5" type="button">Show All Pokemon!</button>
+
+         <section>
+
+         <form id="show-pokemon">
+
+          <div id="pokemon-showAll">
+          </div>
+         </form>
+       </section>
+
+       <section>
+         <form id="update-pokemon">
+           <legend>Edit Pokemon!</legend>
+
+
+           <label for="Pokemon-Name">Pokemon Name</label>
+           <input name="pokemon[name]" type="text" placeholder="Update Name">
+
+           <label for="Pokemon-Type">Type</label>
+           <input name="pokemon[type]" type="text" placeholder="Update Type">
+
+           <label for="Pokemon-Move">Move</label>
+           <input name="pokemon[move]" type="text" placeholder="Update Move">
+
+           <input class="edit" type="submit" value="Update Pokemon">
+
+         </form>
+       </section>
+
+
+      <section>
+
+      <form id="sign-out">
+      <button type="submit" class="button6">Sign out!</button>
+
+      </form>
+    </section>
+
+    </body>
+</html>
